@@ -15,7 +15,7 @@ export class PointService {
    * @returns UserPoint   */
   async getPoint(userId: number) {
     const user = await this.userRepository.selectById(userId);
-    return { point: user.getPoints(), updateMillis: user.getUpdateMillis };
+    return { point: user.getPoint(), updateMillis: user.getUpdateMillis };
   }
   /**
    * 사용자의 포인트 히스토리를 조회합니다.
@@ -31,10 +31,10 @@ export class PointService {
    * @returns UserPoint   */
   async charge(userId: number, amount: number) {
     const user = await this.userRepository.selectById(userId);
-    user.chargePoints(amount);
+    user.chargePoint(amount);
     const updatedUser = await this.userRepository.save(user);
     return {
-      point: updatedUser.getPoints(),
+      point: updatedUser.getPoint(),
       updateMillis: updatedUser.getUpdateMillis,
     };
   }
@@ -44,10 +44,10 @@ export class PointService {
    * @returns UserPoint   */
   async use(userId: number, amount: number) {
     const user = await this.userRepository.selectById(userId);
-    user.usePoints(amount);
+    user.usePoint(amount);
     const updatedUser = await this.userRepository.save(user);
     return {
-      point: updatedUser.getPoints(),
+      point: updatedUser.getPoint(),
       updateMillis: updatedUser.getUpdateMillis,
     };
   }

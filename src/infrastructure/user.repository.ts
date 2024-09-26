@@ -21,7 +21,7 @@ export class UserRepository implements UserRepositoryInterface {
     );
   }
   async save(user: User): Promise<User> {
-    await this.userPointTable.insertOrUpdate(user.getId(), user.getPoints());
+    await this.userPointTable.insertOrUpdate(user.getId(), user.getPoint());
     // user의 history중 변경된 것(history id가 -1인 것)들만 저장
     const histories = user.getPointHistory().filter((v) => v.id === -1);
     for (const history of histories) {
